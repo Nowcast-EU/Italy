@@ -881,50 +881,50 @@ PARTIES.forEach(p => {
 
 });
 
-    // --- redistribute coalition seats ---
-  redistributeCoalitionSeats(totals, nationalVotes);
+// --- redistribute coalition seats ---
+redistributeCoalitionSeats(totals, nationalVotes);
 
-  // --- calculate OTH as remainder ---
+// --- display normal party seat results ---
+PARTIES.forEach((n,i)=>{
+  const seats = totals[n];
+  document.getElementById(`seats-${i}`).textContent = seats;
+  parties[i].final = seats;
+
+  const diff = seats - (PREV_2023[n] || 0);
+  const diffCell = document.getElementById(`diff-${i}`);
+  if (diff > 0) {
+    diffCell.textContent = `+${diff}`;
+    diffCell.className = 'diff-column positive';
+  } else if (diff < 0) {
+    diffCell.textContent = `${diff}`;
+    diffCell.className = 'diff-column negative';
+  } else {
+    diffCell.textContent = '(=)';
+    diffCell.className = 'diff-column equal';
+  }
+});
+
+// --- coalition seat sums (CDX and CSX) ---
+const CDX_total = (totals["FdI"] || 0) + (totals["Lega"] || 0) + (totals["Forza"] || 0) + (totals["NM"] || 0);
+const CSX_total = (totals["PD"] || 0) + (totals["M5S"] || 0) + (totals["AVS"] || 0) + (totals["IV"] || 0) + (totals["+E"] || 0);
+
+const CDX_index = PARTIES.indexOf("CDX");
+const CSX_index = PARTIES.indexOf("CSX");
+if (CDX_index !== -1) document.getElementById(`seats-${CDX_index}`).textContent = CDX_total;
+if (CSX_index !== -1) document.getElementById(`seats-${CSX_index}`).textContent = CSX_total;
+
+// --- NOW calculate OTH as remainder (final position) ---
 const TOTAL_SEATS = 400;
-const cdxSeats = totals["CDX"] || 0;
-const csxSeats = totals["CSX"] || 0;
+const cdxSeats = CDX_total;
+const csxSeats = CSX_total;
 const azioneSeats = totals["Azione"] || 0;
 totals["OTH"] = Math.max(0, TOTAL_SEATS - (cdxSeats + csxSeats + azioneSeats));
+const OTH_index = PARTIES.indexOf("OTH");
+if (OTH_index !== -1) document.getElementById(`seats-${OTH_index}`).textContent = totals["OTH"];
 
-  // --- display normal party seat results ---
-  PARTIES.forEach((n,i)=>{
-    const seats = totals[n];
-    document.getElementById(`seats-${i}`).textContent = seats;
-    parties[i].final = seats;
-
-    const diff = seats - (PREV_2023[n] || 0);
-    const diffCell = document.getElementById(`diff-${i}`);
-    if (diff > 0) {
-      diffCell.textContent = `+${diff}`;
-      diffCell.className = 'diff-column positive';
-    } else if (diff < 0) {
-      diffCell.textContent = `${diff}`;
-      diffCell.className = 'diff-column negative';
-    } else {
-      diffCell.textContent = '(=)';
-      diffCell.className = 'diff-column equal';
-    }
-  });
-
-  // --- coalition seat sums (CDX and CSX) ---
-  const CDX_total = (totals["FdI"] || 0) + (totals["Lega"] || 0) + (totals["Forza"] || 0) + (totals["NM"] || 0);
-  const CSX_total = (totals["PD"] || 0) + (totals["M5S"] || 0) + (totals["AVS"] || 0) + (totals["IV"] || 0) + (totals["+E"] || 0);
-
-  const CDX_index = PARTIES.indexOf("CDX");
-  const CSX_index = PARTIES.indexOf("CSX");
-
-  if (CDX_index !== -1) document.getElementById(`seats-${CDX_index}`).textContent = CDX_total;
-  if (CSX_index !== -1) document.getElementById(`seats-${CSX_index}`).textContent = CSX_total;
-
-  document.getElementById('total-seats').textContent = Object.values(totals).reduce((a, b) => a + b, 0);
-  document.getElementById('calculate').style.background = '#008500';
-  updateCoalitionFromTotals(totals);
-}
+document.getElementById('total-seats').textContent = Object.values(totals).reduce((a, b) => a + b, 0);
+document.getElementById('calculate').style.background = '#008500';
+updateCoalitionFromTotals(totals);
 
 /* ---- Reset ---- */
 document.getElementById('reset').addEventListener('click', ()=>{
