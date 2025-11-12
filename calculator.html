@@ -922,6 +922,24 @@ totals["OTH"] = Math.max(0, TOTAL_SEATS - (cdxSeats + csxSeats + azioneSeats));
 const OTH_index = PARTIES.indexOf("OTH");
 if (OTH_index !== -1) document.getElementById(`seats-${OTH_index}`).textContent = totals["OTH"];
 
+  // --- recalc diffs for CDX, CSX, and OTH after coalition sums ---
+["CDX", "CSX", "OTH"].forEach(party => {
+  const index = PARTIES.indexOf(party);
+  const seats = parseInt(document.getElementById(`seats-${index}`).textContent) || 0;
+  const diff = seats - (PREV_2023[party] || 0);
+  const diffCell = document.getElementById(`diff-${index}`);
+  if (diff > 0) {
+    diffCell.textContent = `+${diff}`;
+    diffCell.className = "diff-column positive";
+  } else if (diff < 0) {
+    diffCell.textContent = `${diff}`;
+    diffCell.className = "diff-column negative";
+  } else {
+    diffCell.textContent = "(=)";
+    diffCell.className = "diff-column equal";
+  }
+});
+
 document.getElementById('total-seats').textContent = Object.values(totals).reduce((a, b) => a + b, 0);
 document.getElementById('calculate').style.background = '#008500';
 updateCoalitionFromTotals(totals);
