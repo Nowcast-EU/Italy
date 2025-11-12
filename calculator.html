@@ -809,17 +809,25 @@ function dhondtSeats(votes, seats = 6, nationalVotes, validParties) {
   return alloc;
 }
 
+  /* ---- Manual weighting factors for coalition seat distribution ---- */
+const CDX_WEIGHTS = { "FdI": 0.7, "Lega": 1.3, "Forza": 1.0, "NM": 1.0 };
+const CSX_WEIGHTS = { "PD": 1.0, "M5S": 1.0, "AVS": 1.0, "IV": 1.0, "+E": 1.0 };
+
   /* ---- Redistribute coalition seats to component parties ---- */
 function redistributeCoalitionSeats(totals, nationalVotes) {
   const redistribute = (coalition, members) => {
     const coalitionSeats = totals[coalition] || 0;
-    const sumVotes = members.reduce((a, p) => a + (nationalVotes[p] || 0), 0);
+const weights = coalition === "CDX" ? CDX_WEIGHTS : CSX_WEIGHTS;
+const sumVotes = members.reduce(
+  (a, p) => a + (nationalVotes[p] || 0) * (weights[p] || 1),
+  0
+);
     if (coalitionSeats > 0 && sumVotes > 0) {
       // distribute proportionally based on each party’s share within the coalition
       let distributed = 0;
       const temp = {};
       members.forEach(p => {
-        temp[p] = Math.round(coalitionSeats * (nationalVotes[p] || 0) / sumVotes);
+temp[p] = Math.round(coalitionSeats * ((nationalVotes[p] || 0) * (weights[p] || 1)) / sumVotes);
         distributed += temp[p];
       });
       // adjust rounding error if any
