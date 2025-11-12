@@ -723,7 +723,15 @@ function renderTable(){
   tbody.innerHTML=parties.map((p,i)=>`
   <tr class="party-row ${p.name}">
     <td class="party-column" style="--party-color:${p.color}">${p.name}</td>
-      <td class="ge2024-column">${p.ge2024.toFixed(1)}%</td>
+<td class="ge2024-column">
+  ${
+    p.name === "IV" || p.name === "Azione"
+      ? "N/A"
+      : p.name === "CSX"
+      ? "*41.5%"
+      : `${p.ge2024.toFixed(1)}%`
+  }
+</td>
          <td>
       <div class="input-wrapper">
         ${
