@@ -925,6 +925,7 @@ if (OTH_index !== -1) document.getElementById(`seats-${OTH_index}`).textContent 
 document.getElementById('total-seats').textContent = Object.values(totals).reduce((a, b) => a + b, 0);
 document.getElementById('calculate').style.background = '#008500';
 updateCoalitionFromTotals(totals);
+}
 
 /* ---- Reset ---- */
 document.getElementById('reset').addEventListener('click', ()=>{
