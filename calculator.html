@@ -693,25 +693,27 @@ function attachInputBehaviour(calculate, updateVoteTotal) {
       }
     });
 
-    // When user presses Enter
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
+  // When user presses Enter or Tab → move to next *enabled* input
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === 'Tab') {
+    e.preventDefault();
 
-        if (input.value === '' || isNaN(parseFloat(input.value))) {
-          input.value = originalValue;
-        } else {
-          input.value = parseFloat(input.value).toFixed(1);
-        }
+    if (input.value === '' || isNaN(parseFloat(input.value))) {
+      input.value = originalValue;
+    } else {
+      input.value = parseFloat(input.value).toFixed(1);
+    }
 
-        // move to next input
-        if (inputs[index + 1]) {
-          inputs[index + 1].focus();
-        } else {
-          inputs[0].focus(); // loop to first input
-        }
-      }
-    });
+    // Find the next interactable input (skip disabled ones)
+    let nextIndex = (index + 1) % inputs.length;
+    while (inputs[nextIndex].disabled) {
+      nextIndex = (nextIndex + 1) % inputs.length;
+      if (nextIndex === index) break; // safety guard
+    }
+
+    inputs[nextIndex].focus();
+  }
+});
   });
 }
 
