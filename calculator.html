@@ -881,6 +881,13 @@ const validParties = PARTIES.filter(p => (sVotes[p] || 0) + EPS >= 0.03 * totalV
     // --- redistribute coalition seats ---
   redistributeCoalitionSeats(totals, nationalVotes);
 
+  // --- calculate OTH as remainder ---
+const TOTAL_SEATS = 400;
+const cdxSeats = totals["CDX"] || 0;
+const csxSeats = totals["CSX"] || 0;
+const azioneSeats = totals["Azione"] || 0;
+totals["OTH"] = Math.max(0, TOTAL_SEATS - (cdxSeats + csxSeats + azioneSeats));
+
   // --- display normal party seat results ---
   PARTIES.forEach((n,i)=>{
     const seats = totals[n];
