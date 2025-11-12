@@ -253,6 +253,19 @@ tfoot td {
   }
 }
 
+  /* --- Highlight CDX and CSX rows --- */
+.party-row.CDX td {
+  background-color: rgba(0, 0, 255, 0.05); /* light blue tint */
+  border-top: 2px solid #0000FF;
+  border-bottom: 2px solid #0000FF;
+}
+
+.party-row.CSX td {
+  background-color: rgba(255, 0, 0, 0.05); /* light red tint */
+  border-top: 2px solid #FF0000;
+  border-bottom: 2px solid #FF0000;
+}
+
 </style>
 </head>
 
@@ -497,8 +510,8 @@ function attachInputBehaviour(calculate, updateVoteTotal) {
 function renderTable(){
   const tbody=document.getElementById('tbody');
   tbody.innerHTML=parties.map((p,i)=>`
-    <tr>
-      <td class="party-column" style="--party-color:${p.color}">${p.name}</td>
+  <tr class="party-row ${p.name}">
+    <td class="party-column" style="--party-color:${p.color}">${p.name}</td>
       <td class="ge2024-column">${p.ge2024.toFixed(1)}%</td>
       <td>
         <div class="input-wrapper">
