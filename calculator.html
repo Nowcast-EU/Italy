@@ -757,12 +757,10 @@ function updateVoteTotal(){
   if (CSX_input) CSX_input.value = CSX_sum.toFixed(1);
   if (OTH_input)  OTH_input.value  = OTH_sum.toFixed(1);
 
-  // --- total sum (should always be ~100) ---
-  let sum = 0;
-  parties.forEach((p, i) => {
-    sum += parseFloat(document.getElementById(`votes-${i}`).value) || 0;
-  });
-  document.getElementById('total-votes').textContent = sum.toFixed(1) + '%';
+// --- total sum (should always be CDX + CSX + Azione + OTH) ---
+const getVal = (party) => parseFloat(document.querySelector(`#votes-${PARTIES.indexOf(party)}`)?.value) || 0;
+const sum = getVal("CDX") + getVal("CSX") + getVal("Azione") + getVal("OTH");
+document.getElementById('total-votes').textContent = sum.toFixed(1) + '%';
 }
 
 /* ---- Proportional swing ---- */
