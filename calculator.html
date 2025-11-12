@@ -528,7 +528,7 @@ function renderTable(){
          <td>
       <div class="input-wrapper">
         ${
-          (p.name === "CDX" || p.name === "CSX")
+          (p.name === "CDX" || p.name === "CSX" || p.name === "OTH")
             ? `<input type="number" id="votes-${i}" value="${p.votes.toFixed(1)}" disabled class="disabled-input">`
             : `<input type="number" id="votes-${i}" value="${p.votes.toFixed(1)}" min="0" max="100" step="0.1">`
         }
@@ -544,18 +544,23 @@ function renderTable(){
 }
 
 function updateVoteTotal(){
-  // --- compute coalition sums first ---
   const getVal = (party) => parseFloat(document.querySelector(`#votes-${PARTIES.indexOf(party)}`)?.value) || 0;
 
+  // --- coalition sums ---
   const CDX_sum = getVal("FdI") + getVal("Lega") + getVal("Forza") + getVal("NM");
   const CSX_sum = getVal("PD") + getVal("M5S") + getVal("AVS") + getVal("IV") + getVal("+E");
+  const AZIONE_val = getVal("Azione");
+  const OTH_sum = 100 - (CDX_sum + CSX_sum + AZIONE_val);
 
+  // --- update disabled inputs ---
   const CDX_input = document.querySelector(`#votes-${PARTIES.indexOf("CDX")}`);
   const CSX_input = document.querySelector(`#votes-${PARTIES.indexOf("CSX")}`);
+  const OTH_input = document.querySelector(`#votes-${PARTIES.indexOf("OTH")}`);
   if (CDX_input) CDX_input.value = CDX_sum.toFixed(1);
   if (CSX_input) CSX_input.value = CSX_sum.toFixed(1);
+  if (OTH_input)  OTH_input.value  = OTH_sum.toFixed(1);
 
-  // --- continue normal total sum ---
+  // --- total sum (should always be ~100) ---
   let sum = 0;
   parties.forEach((p, i) => {
     sum += parseFloat(document.getElementById(`votes-${i}`).value) || 0;
