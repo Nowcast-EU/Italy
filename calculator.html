@@ -875,7 +875,10 @@ const validParties = PARTIES.filter(p => (sVotes[p] || 0) + EPS >= 0.03 * totalV
   // 👇 Allocate seats only among those parties
   const s = dhondtSeats(sVotes, CONSTITUENCY_SEATS[row.name] || 6, nationalVotes, validParties);
 
-  PARTIES.forEach(p => totals[p] += (s[p] || 0));
+PARTIES.forEach(p => {
+  if (p !== "OTH") totals[p] += (s[p] || 0);
+});
+
 });
 
     // --- redistribute coalition seats ---
