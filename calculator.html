@@ -257,14 +257,14 @@ tfoot td {
 .party-row.CDX td {
   background-color: #f5f5f5;   /* light neutral grey */
   border-bottom: 2px solid #0000FF; /* bold blue line below */
-  height: 18px;                /* slightly thinner row */
+  height: 16px;                /* slightly thinner row */
   vertical-align: middle;
 }
 
 .party-row.CSX td {
   background-color: #f5f5f5;   /* light neutral grey */
   border-bottom: 2px solid #FF0000; /* bold red line below */
-  height: 18px;
+  height: 16px;
   vertical-align: middle;
 }
   
@@ -281,6 +281,14 @@ tfoot td {
   color: #555;
   cursor: not-allowed;
   border: 1px solid #ccc;
+}
+
+  /* --- Smaller input boxes for coalition total rows (CDX / CSX) --- */
+.party-row.CDX .input-wrapper input,
+.party-row.CSX .input-wrapper input {
+  height: var(--coalition-input-h, 15px); /* adjustable height variable */
+  padding: 2px 4px;
+  font-size: 12px;
 }
 
 </style>
@@ -723,7 +731,15 @@ function renderTable(){
   tbody.innerHTML=parties.map((p,i)=>`
   <tr class="party-row ${p.name}">
     <td class="party-column" style="--party-color:${p.color}">${p.name}</td>
-      <td class="ge2024-column">${p.ge2024.toFixed(1)}%</td>
+<td class="ge2024-column">
+  ${
+    p.name === "IV" || p.name === "Azione"
+      ? "N/A"
+      : p.name === "CSX"
+      ? "*41.5%"
+      : `${p.ge2024.toFixed(1)}%`
+  }
+</td>
          <td>
       <div class="input-wrapper">
         ${
@@ -978,7 +994,9 @@ overlay.innerHTML = "";
 legend.innerHTML = "";
 
 // 🟢 Only show parties that currently have seats
-const validParties = PARTIES.filter(n => (t[n] || 0) > 0);
+const validParties = PARTIES.filter(
+  n => (t[n] || 0) > 0 && n !== "CDX" && n !== "CSX"
+);
 
 // ❌ Do NOT clear "selected" — this allows zero-seat parties to stay selected
 // selected = selected.filter(n => validParties.includes(n));
