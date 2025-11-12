@@ -809,6 +809,39 @@ function dhondtSeats(votes, seats = 6, nationalVotes, validParties) {
   return alloc;
 }
 
+  /* ---- Redistribute coalition seats to component parties ---- */
+function redistributeCoalitionSeats(totals, nationalVotes) {
+  const redistribute = (coalition, members) => {
+    const coalitionSeats = totals[coalition] || 0;
+    const sumVotes = members.reduce((a, p) => a + (nationalVotes[p] || 0), 0);
+    if (coalitionSeats > 0 && sumVotes > 0) {
+      // distribute proportionally based on each party’s share within the coalition
+      let distributed = 0;
+      const temp = {};
+      members.forEach(p => {
+        temp[p] = Math.round(coalitionSeats * (nationalVotes[p] || 0) / sumVotes);
+        distributed += temp[p];
+      });
+      // adjust rounding error if any
+      const diff = coalitionSeats - distributed;
+      if (diff !== 0) {
+        const sorted = members
+          .slice()
+          .sort((a, b) => (nationalVotes[b] || 0) - (nationalVotes[a] || 0));
+        for (let i = 0; i < Math.abs(diff); i++) {
+          const target = sorted[i % sorted.length];
+          temp[target] += diff > 0 ? 1 : -1;
+        }
+      }
+      members.forEach(p => totals[p] = (totals[p] || 0) + temp[p]);
+      totals[coalition] = 0; // coalition no longer holds seats directly
+    }
+  };
+
+  redistribute("CDX", ["FdI", "Lega", "Forza", "NM"]);
+  redistribute("CSX", ["PD", "M5S", "AVS", "IV", "+E"]);
+}
+
 /* ---- Calculate ---- */
 function calculate(){
   const nationalVotes={};
@@ -835,6 +868,9 @@ perConst.forEach(row => {
 
   PARTIES.forEach(p => totals[p] += (s[p] || 0));
 });
+
+    // --- redistribute coalition seats ---
+  redistributeCoalitionSeats(totals, nationalVotes);
 
   // --- display normal party seat results ---
   PARTIES.forEach((n,i)=>{
