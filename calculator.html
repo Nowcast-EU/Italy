@@ -740,8 +740,9 @@ function renderTable(){
   updateVoteTotal();
 }
 
-function updateVoteTotal(){
-  const getVal = (party) => parseFloat(document.querySelector(`#votes-${PARTIES.indexOf(party)}`)?.value) || 0;
+function updateVoteTotal() {
+  const getVal = (party) =>
+    parseFloat(document.querySelector(`#votes-${PARTIES.indexOf(party)}`)?.value) || 0;
 
   // --- coalition sums ---
   const CDX_sum = getVal("FdI") + getVal("Lega") + getVal("Forza") + getVal("NM");
@@ -755,12 +756,11 @@ function updateVoteTotal(){
   const OTH_input = document.querySelector(`#votes-${PARTIES.indexOf("OTH")}`);
   if (CDX_input) CDX_input.value = CDX_sum.toFixed(1);
   if (CSX_input) CSX_input.value = CSX_sum.toFixed(1);
-  if (OTH_input)  OTH_input.value  = OTH_sum.toFixed(1);
+  if (OTH_input) OTH_input.value = OTH_sum.toFixed(1);
 
-// --- total sum (should always be CDX + CSX + Azione + OTH) ---
-const getVal = (party) => parseFloat(document.querySelector(`#votes-${PARTIES.indexOf(party)}`)?.value) || 0;
-const sum = getVal("CDX") + getVal("CSX") + getVal("Azione") + getVal("OTH");
-document.getElementById('total-votes').textContent = sum.toFixed(1) + '%';
+  // --- total sum (should always be CDX + CSX + Azione + OTH) ---
+  const total = CDX_sum + CSX_sum + AZIONE_val + OTH_sum;
+  document.getElementById("total-votes").textContent = total.toFixed(1) + "%";
 }
 
 /* ---- Proportional swing ---- */
