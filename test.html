@@ -978,7 +978,9 @@ overlay.innerHTML = "";
 legend.innerHTML = "";
 
 // 🟢 Only show parties that currently have seats
-const validParties = PARTIES.filter(n => (t[n] || 0) > 0);
+const validParties = PARTIES.filter(
+  n => (t[n] || 0) > 0 && n !== "CDX" && n !== "CSX"
+);
 
 // ❌ Do NOT clear "selected" — this allows zero-seat parties to stay selected
 // selected = selected.filter(n => validParties.includes(n));
