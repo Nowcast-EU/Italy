@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <style>
     :root {
-      --middle-offset: 20px; /* 👈 adjust this value to move the middle column right/left on desktop */
+      --middle-offset: 35%; /* 👈 percentage instead of px */
     }
 
     body {
@@ -14,11 +14,15 @@
 
     .row {
       display: grid;
-      grid-template-columns: 60px auto 45px; /* fixed layout across devices */
+      grid-template-columns: 60px auto 70px; /* fixed layout across devices */
       align-items: center;
       padding: 1px 0;
       width: 100%;
     }
+
+.row {
+  line-height: 1.2;
+}
 
     .left {
       display: flex;
@@ -28,7 +32,7 @@
 
     .middle {
       text-align: left;
-      padding-left: var(--middle-offset);
+      padding-left: var(--middle-offset); /* scalable offset */
     }
 
     .right {
@@ -48,6 +52,49 @@
       margin: 2px 0;
     }
 
+.right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.right span {
+  display: inline-block;
+  width: 4.5em;
+  text-align: right;
+}
+
+.bar-container {
+  position: relative;
+  width: 16rem;
+  height: 20px;
+  border-radius: 1px;
+  padding-top: 0px;
+  overflow: hidden;
+}
+
+.bar-wrapper {
+  margin-top: 6px;
+}
+
+.bar-title {
+  font-size: 0.85rem;
+  line-height: 2;
+  margin-bottom: 0px;
+  color: #333;
+  font-weight: 600;
+}
+
+.bar-container.small {
+  height: 13px;   /* half of 20px */
+  padding-top: 2px;
+}
+
+.bar-title.small {
+  font-size: 0.75rem;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
     .page-break {
       page-break-after: always;
     }
@@ -55,7 +102,7 @@
     /* --- responsive adjustment for mobile --- */
     @media (max-width: 600px) {
       :root {
-        --middle-offset: 10px; /* 👈 smaller offset on mobile */
+        --middle-offset: 25%; /* 👈 smaller % on mobile */
       }
 
       .row {
@@ -66,115 +113,995 @@
 </head>
 <body>
 
-{{#if CDX}}
-  <div class="row page-break">
-    <div class="left">
-      <div class="circle" style="background-color: #0000FF;"></div>
-      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
-    </div>
-    <div class="middle">{{CDX}}</div>
-    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
-  </div>
-  <div class="divider"></div>
-{{/if}}
-
-{{#if CSX}}
-  <div class="row page-break">
-    <div class="left">
-      <div class="circle" style="background-color: #FF0000;"></div>
-      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
-    </div>
-    <div class="middle">{{CSX}}</div>
-    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
-  </div>
-  <div class="divider"></div>
-{{/if}}
-
-{{#if FdI}}
-  <div class="row page-break">
-    <div class="left">
-      <div class="circle" style="background-color: #03386A;"></div>
-      <span style="color: #03386A; font-weight: bold;">FdI:</span>
-    </div>
-    <div class="middle">{{FdI}}</div>
-    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
-  </div>
-  <div class="divider"></div>
-{{/if}}
-
-{{#if PD}}
-  <div class="row page-break">
-    <div class="left">
-      <div class="circle" style="background-color: #EF1C27;"></div>
-      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
-    </div>
-    <div class="middle">{{PD}}</div>
-    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
-  </div>
-  <div class="divider"></div>
-{{/if}}
-
-{{#if M5S}}
+{{#if M5S1}}
   <div class="row page-break">
     <div class="left">
       <div class="circle" style="background-color: #FFD700;"></div>
       <span style="color: #FFD700; font-weight: bold;">M5S:</span>
     </div>
-    <div class="middle">{{M5S}}</div>
+    <div class="middle">{{M5S1}}</div>
     <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
   </div>
   <div class="divider"></div>
 {{/if}}
 
-{{#if Lega}}
-  <div class="row page-break">
-    <div class="left">
-      <div class="circle" style="background-color: #008000;"></div>
-      <span style="color: #008000; font-weight: bold;">Lega:</span>
-    </div>
-    <div class="middle">{{Lega}}</div>
-    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
-  </div>
-  <div class="divider"></div>
-{{/if}}
-
-{{#if Forza}}
-  <div class="row page-break">
-    <div class="left">
-      <div class="circle" style="background-color: #3399ff;"></div>
-      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
-    </div>
-    <div class="middle">{{Forza}}</div>
-    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
-  </div>
-  <div class="divider"></div>
-{{/if}}
-
-{{#if AVS}}
+{{#if AVS1}}
   <div class="row page-break">
     <div class="left">
       <div class="circle" style="background-color: #CC0066;"></div>
       <span style="color: #CC0066; font-weight: bold;">AVS:</span>
     </div>
-    <div class="middle">{{AVS}}</div>
+    <div class="middle">{{AVS1}}</div>
     <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
   </div>
   <div class="divider"></div>
 {{/if}}
 
-{{#if Azione}}
+{{#if PD1}}
   <div class="row page-break">
     <div class="left">
-      <div class="circle" style="background-color: #0039AA;"></div>
-      <span style="color: #0039AA; font-weight: bold;">Azione:</span>
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
     </div>
-    <div class="middle">{{Azione}}</div>
+    <div class="middle">{{PD1}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX1}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX1}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione1}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione1}}</div>
     <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
   </div>
   <div class="divider"></div>
 {{/if}}
 
-{{#if OTH}}
+{{#if CDX1}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX1}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza1}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza1}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI1}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI1}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega1}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega1}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S2}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS2}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD2}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX2}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione2}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX2}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza2}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI2}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega2}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega2}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S3}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS3}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD3}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX3}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione3}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX3}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza3}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI3}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega3}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega3}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S4}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS4}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD4}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX4}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione4}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX4}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza4}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI4}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega4}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega4}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S5}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS5}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD5}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX5}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione5}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX5}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza5}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI5}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega5}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega5}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S6}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS6}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD6}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX6}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione6}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX6}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza6}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI6}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega6}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega6}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S7}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS7}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD7}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX7}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione7}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX7}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza7}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI7}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega7}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega7}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S8}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS8}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD8}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX8}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione8}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX8}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza8}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI8}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega8}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega8}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
+
+{{#if M5S9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FFD700;"></div>
+      <span style="color: #FFD700; font-weight: bold;">M5S:</span>
+    </div>
+    <div class="middle">{{M5S9}}</div>
+    <div class="right"><span style="color: {{Colour_M}};"><i>{{M%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if AVS9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #CC0066;"></div>
+      <span style="color: #CC0066; font-weight: bold;">AVS:</span>
+    </div>
+    <div class="middle">{{AVS9}}</div>
+    <div class="right"><span style="color: {{Colour_A}};"><i>{{A%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if PD9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #EF1C27;"></div>
+      <span style="color: #EF1C27; font-weight: bold;">PD:</span>
+    </div>
+    <div class="middle">{{PD9}}</div>
+    <div class="right"><span style="color: {{Colour_P}};"><i>{{P%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CSX9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #FF0000;"></div>
+      <span style="color: #FF0000; font-weight: bold;">CSX:</span>
+    </div>
+    <div class="middle">{{CSX9}}</div>
+    <div class="right"><span style="color: {{Colour_SX}};"><i>{{SX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Azione9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #08c79e;"></div>
+      <span style="color: #08c79e; font-weight: bold;">Azione:</span>
+    </div>
+    <div class="middle">{{Azione9}}</div>
+    <div class="right"><span style="color: {{Colour_Az}};"><i>{{Az%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if CDX9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #0000FF;"></div>
+      <span style="color: #0000FF; font-weight: bold;">CDX:</span>
+    </div>
+    <div class="middle">{{CDX9}}</div>
+    <div class="right"><span style="color: {{Colour_DX}};"><i>{{DX%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Forza9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #3399ff;"></div>
+      <span style="color: #3399ff; font-weight: bold;">Forza:</span>
+    </div>
+    <div class="middle">{{Forza9}}</div>
+    <div class="right"><span style="color: {{Colour_Fz}};"><i>{{Fz%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if FdI9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #03386A;"></div>
+      <span style="color: #03386A; font-weight: bold;">FdI:</span>
+    </div>
+    <div class="middle">{{FdI9}}</div>
+    <div class="right"><span style="color: {{Colour_F}};"><i>{{F%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+{{#if Lega9}}
+  <div class="row page-break">
+    <div class="left">
+      <div class="circle" style="background-color: #008000;"></div>
+      <span style="color: #008000; font-weight: bold;">Lega:</span>
+    </div>
+    <div class="middle">{{Lega9}}</div>
+    <div class="right"><span style="color: {{Colour_L}};"><i>{{L%}}</i></span></div>
+  </div>
+  <div class="divider"></div>
+{{/if}}
+
+
   <div class="row page-break">
     <div class="left">
       <div class="circle" style="background-color: #999999;"></div>
@@ -184,36 +1111,123 @@
     <div class="right"><span style="color: {{Colour_O}};"><i>{{O%}}</i></span></div>
   </div>
   <div class="divider"></div>
-{{/if}}
 
 </body>
 </p>
 
-<div style="margin-top: 5px;">
-  <div style="position: relative; width: 13rem; height: 20px; border-radius: 1px; padding-top: 5px; overflow: hidden;">
-    <!-- Vertical dashed line at 50% -->
-    <div style="
-      position: absolute;
-      top: 0;
-      left: 50%;
-      height: 100%;
-      width: 0;
-      border-left: 2px dashed black;
-      z-index: 2;">
-    </div>
+<div class="bar-wrapper">
+
+
+  <div class="bar-title">Nowcast - Jan 11</div>
+
+  <div class="bar-container">
 
     <!-- Stacked bar -->
     <div style="display: flex; height: 100%; width: 100%; position: relative; z-index: 1;">
-      <div style="width: {{M5S}}; background-color: #FFD700;"></div>
-      <div style="width: {{AVS}}; background-color: #CC0066;"></div>
-      <div style="width: {{PD}}; background-color: #EF1C27;"></div>
-      <div style="width: {{CSX}}; background-color: #FF0000;"></div>
-      <div style="width: {{Azione}}; background-color: #0039AA;"></div>
+      <div style="width: {{M5S1}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S2}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S3}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S4}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S5}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S6}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S7}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S8}}; background-color: #FFD700;"></div>
+      <div style="width: {{M5S9}}; background-color: #FFD700;"></div>
+      <div style="width: {{AVS1}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS2}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS3}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS4}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS5}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS6}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS7}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS8}}; background-color: #CC0066;"></div>
+      <div style="width: {{AVS9}}; background-color: #CC0066;"></div>
+      <div style="width: {{PD1}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD2}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD3}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD4}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD5}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD6}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD7}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD8}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PD9}}; background-color: #EF1C27;"></div>
+      <div style="width: {{CSX1}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX2}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX3}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX4}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX5}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX6}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX7}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX8}}; background-color: #FF0000;"></div>
+      <div style="width: {{CSX9}}; background-color: #FF0000;"></div>
+      <div style="width: {{Azione1}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione2}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione3}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione4}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione5}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione6}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione7}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione8}}; background-color: #08c79e;"></div>
+      <div style="width: {{Azione9}}; background-color: #08c79e;"></div>
       <div style="width: {{OTH}}; background-color: #DCDCDC;"></div>
-      <div style="width: {{CDX}}; background-color: #0000FF;"></div>
-      <div style="width: {{Forza}}; background-color: #3399ff;"></div>
-      <div style="width: {{FdI}}; background-color: #03386A;"></div>
-      <div style="width: {{Lega}}; background-color: #008000;"></div>
+      <div style="width: {{CDX1}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX2}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX3}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX4}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX5}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX6}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX7}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX8}}; background-color: #0000FF;"></div>
+     <div style="width: {{CDX9}}; background-color: #0000FF;"></div>
+     <div style="width: {{Forza1}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza2}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza3}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza4}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza5}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza6}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza7}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza8}}; background-color: #3399ff;"></div>
+     <div style="width: {{Forza9}}; background-color: #3399ff;"></div>
+     <div style="width: {{FdI1}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI2}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI3}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI4}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI5}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI6}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI7}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI8}}; background-color: #03386A;"></div>
+     <div style="width: {{FdI9}}; background-color: #03386A;"></div>
+     <div style="width: {{Lega1}}; background-color: #008000;"></div>
+     <div style="width: {{Lega2}}; background-color: #008000;"></div>
+     <div style="width: {{Lega3}}; background-color: #008000;"></div>
+     <div style="width: {{Lega4}}; background-color: #008000;"></div>
+     <div style="width: {{Lega5}}; background-color: #008000;"></div>
+     <div style="width: {{Lega6}}; background-color: #008000;"></div>
+     <div style="width: {{Lega7}}; background-color: #008000;"></div>
+     <div style="width: {{Lega8}}; background-color: #008000;"></div>
+     <div style="width: {{Lega9}}; background-color: #008000;"></div>
+ 
     </div>
   </div>
 </div>
+
+<div class="bar-wrapper">
+
+  <div class="bar-container small">
+
+    <!-- Stacked bar -->
+    <div style="display: flex; height: 100%; width: 100%; position: relative; z-index: 1;">
+      <div style="width: {{PrevM}}; background-color: #FFD700;"></div>
+      <div style="width: {{PrevA}}; background-color: #CC0066;"></div>
+      <div style="width: {{PrevP}}; background-color: #EF1C27;"></div>
+      <div style="width: {{PrevSX}}; background-color: #FF0000;"></div>
+      <div style="width: {{PrevAz}}; background-color: #08c79e;"></div>
+      <div style="width: {{PrevOTH}}; background-color: #DCDCDC;"></div>
+      <div style="width: {{PrevDX}}; background-color: #0000FF;"></div>
+      <div style="width: {{PrevFz}}; background-color: #3399ff;"></div>
+     <div style="width: {{PrevF}}; background-color: #03386A;"></div>
+     <div style="width: {{PrevL}}; background-color: #008000;"></div>
+  </div>
+</div>
+
+  <div class="bar-title small">2022 Election</div>
