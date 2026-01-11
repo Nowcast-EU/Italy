@@ -11,71 +11,99 @@
   <meta property="og:image" content="https://nowcast-eu.github.io/Italy/thumbnail.png">
   <meta property="og:url" content="https://nowcast-eu.github.io/Italy/">
   <meta property="og:type" content="website">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="🇮🇹 Italy | Nowcast EU Projection">
   <meta name="twitter:description" content="">
   <meta name="twitter:image" content="https://nowcast-eu.github.io/Italy/thumbnail.png">
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      font-family: system-ui, sans-serif;
-    }
+  <!-- Favicon -->
+<link rel="icon" type="image/png" href="IT_favicon.png" />
 
-    .flourish-container {
-      width: 100%;
-      position: relative;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    iframe {
-      width: 100%;
-      border: none;
-      display: block;
-    }
 
-    /* --- Desktop view --- */
-    @media (min-width: 768px) {
-      .flourish-container {
-        /* Aspect ratio: 1 wide, 1.25 tall */
-        aspect-ratio: 1 / 1.25;
-        max-width: 1000px;
-        margin: 0 auto;
-        position: relative;
-      }
+<style>
+/* ===== GLOBAL ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  font-family: system-ui, sans-serif;
+}
 
-      iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
+/* ===== EMBEDS ===== */
+.flourish-container,
+.bar-container {
+  width: 100%;
+  position: relative;
+}
 
-    /* --- Mobile view --- */
-    @media (max-width: 767px) {
-      .flourish-container {
-        aspect-ratio: 1 / 1.6;
-        width: 100%;
-        position: relative;
-      }
+iframe {
+  width: 100%;
+  border: none;
+  display: block;
+}
 
-      iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  </style>
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+  .flourish-container {
+    aspect-ratio: 1 / 1;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .bar-container {
+    aspect-ratio: 2.8 / 1;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+
+  .flourish-container {
+    aspect-ratio: 1 / 1.3;
+  }
+
+  .bar-container {
+    aspect-ratio: 3 / 2;
+  }
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+}
+
+/* ===== LINKS ===== */
+a {
+  color: inherit;
+}
+</style>
 </head>
 <body>
+
   <div class="flourish-container">
     <iframe src="https://flo.uri.sh/visualisation/25966298/embed" scrolling="no" frameborder="0"></iframe>
   </div>
+  
+  <div class="bar-container">
+    <iframe src="https://flo.uri.sh/visualisation/21932037/embed" scrolling="no" frameborder="0"></iframe>
+  </div>
 </body>
+
 </html>
