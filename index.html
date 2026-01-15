@@ -39,6 +39,7 @@ html, body {
 
 /* ===== EMBEDS ===== */
 .flourish-container,
+.graph-container,
 .bar-container {
   width: 100%;
   position: relative;
@@ -64,6 +65,12 @@ iframe {
     margin: 0 auto;
   }
 
+      .graph-container {
+        aspect-ratio: 1.7 / 1;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
   iframe {
     position: absolute;
     inset: 0;
@@ -81,6 +88,10 @@ iframe {
   .bar-container {
     aspect-ratio: 4 / 2;
   }
+
+        .graph-container {
+        aspect-ratio: 2.5 / 2;
+      }
 
   iframe {
     position: absolute;
@@ -103,6 +114,10 @@ a {
   
   <div class="bar-container">
     <iframe src="https://flo.uri.sh/visualisation/21932037/embed" scrolling="no" frameborder="0"></iframe>
+  </div>
+
+        <div class="graph-container">
+    <iframe src="https://flo.uri.sh/visualisation/27227016/embed" scrolling="no" frameborder="0"></iframe>
   </div>
 </body>
 
